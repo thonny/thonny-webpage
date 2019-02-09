@@ -1,0 +1,56 @@
+{#-
+    aamodern/layout.html
+    ~~~~~~~~~~~~~~~~~~~
+
+    Layout for Modern5 theme.
+
+    :copyright: Copyright 2011-2016 by Vlad Riscutia and contributors (see
+    CONTRIBUTORS file)
+    :license: FreeBSD, see LICENSE file
+-#}
+
+{%- extends "boilerplate/layout.html" -%}
+
+{%- block extrahead -%}
+    {{ super() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Adjusts document height if sidebar is taller
+            var documentwrapper = document.getElementsByTagName("article")[0];
+            var sidebar = document.getElementsByClassName("sidebar")[0];
+
+            if (sidebar.offsetHeight > documentwrapper.offsetHeight)
+            {
+                var mainwrapper = document.getElementsByClassName("main")[0];
+                documentwrapper.style.minHeight = mainwrapper.offsetHeight + "px";
+            }
+
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Thonny blog: {{ title|striptags|e }}" />
+    <meta property="og:description" content="{{ description }}" />
+{%- endblock -%}
+
+{%- block navigation -%}
+  <nav role="navigation">
+    <ul>
+      {%- block quicklinks -%}
+        {%- if rss_in_page_nav -%}
+        <li class="quicklink">{{ rss_link() }}</li>
+        {%- endif -%}
+      {%- endblock -%}
+      
+        
+        <li class="main-nav"><a href="/blog/">Blog home</a></li>
+        <li class="main-nav"><a href="/">Thonny home</a></li>
+        <li class="main-nav"><a href="https://bitbucket.org/plas/thonny/downloads/">Downloads</a></li>
+    </ul>
+  </nav>
+{%- endblock -%}
