@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 set -e
 
-VERSION=4.0.0
+VERSION=4.0.1
 VARIANT=thonny
 
 ARCHITECTURE="$(uname -m)"
@@ -74,7 +74,7 @@ else
     echo ";Existence of this file indicates that Python in this directory is private for Thonny" > ${TARGET}/bin/thonny_python.ini
 
     echo "Installing Thonny's dependencies"
-    $TARGET/bin/pip3 install jedi==0.18.* pyserial==3.5 pylint==2.14.* docutils==0.19.* mypy==0.971.* asttokens==2.0.* Send2Trash==1.8.1b0 esptool==4.2.* websockets==10.* ptyprocess==0.7.*
+    $TARGET/bin/pip3 install 'jedi==0.18.*' 'pyserial==3.5' 'pylint==2.14.*' 'docutils==0.19.*' 'mypy==0.971.*' 'asttokens==2.0.*' 'Send2Trash==1.8.1b0' 'esptool==4.2.*' 'bcrypt==3.2.*' 'paramiko==2.11.*' 'websockets==10.*' 'ptyprocess==0.7.*; sys_platform == "linux" or sys_platform == "darwin"' 'adafruit_board_toolkit==1.1.0; sys_platform == "win32" or sys_platform == "darwin"'
     echo "Installing Thonny and its dependencies"
     $TARGET/bin/pip3 install thonny==${VERSION}
 
