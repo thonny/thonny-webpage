@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 set -e
 
-VERSION=4.0.1
+VERSION=4.0.2
 VARIANT=thonny
 
 ARCHITECTURE="$(uname -m)"
@@ -74,7 +74,7 @@ else
     echo ";Existence of this file indicates that Python in this directory is private for Thonny" > ${TARGET}/bin/thonny_python.ini
 
     echo "Installing Thonny's dependencies"
-    $TARGET/bin/pip3 install 'jedi==0.18.*' 'pyserial==3.5' 'pylint==2.14.*' 'docutils==0.19.*' 'mypy==0.971.*' 'asttokens==2.0.*' 'Send2Trash==1.8.1b0' 'esptool==4.2.*' 'bcrypt==3.2.*' 'paramiko==2.11.*' 'websockets==10.*' 'ptyprocess==0.7.*; sys_platform == "linux" or sys_platform == "darwin"' 'adafruit_board_toolkit==1.1.0; sys_platform == "win32" or sys_platform == "darwin"'
+    $TARGET/bin/pip3 install 'jedi==0.18.*' 'pyserial==3.5' 'pylint==2.15.*' 'docutils==0.19.*' 'mypy==0.991.*' 'asttokens==2.2.*' 'Send2Trash==1.8.1b0' 'esptool==4.4.*' 'bcrypt==3.2.*' 'cryptography==38.*' 'paramiko==2.12.*' 'websockets==10.*' 'ptyprocess==0.7.*; sys_platform == "linux" or sys_platform == "darwin"' 'adafruit_board_toolkit==1.1.*; sys_platform == "win32" or sys_platform == "darwin"'
     echo "Installing Thonny and its dependencies"
     $TARGET/bin/pip3 install thonny==${VERSION}
 
@@ -98,9 +98,14 @@ else
     echo "[Desktop Action Edit]" >> $LAUNCHER
     echo "Exec=$TARGET/bin/thonny %F" >> $LAUNCHER
     echo "Name=Edit with Thonny" >> $LAUNCHER
+
+    UNINSTALLER="${TARGET}/bin/uninstall"
+    echo "Creating the uninstaller ($UNINSTALLER)"
+    echo "#!/usr/bin/env bash" > $UNINSTALLER
+    echo "rm -rf $TARGET"
+    echo "rm $LAUNCHER"
   else
     echo "Can't offer alternatives as your system doesn't seem to have suitable Python interpreter."
     exit 1
   fi
 fi
-
