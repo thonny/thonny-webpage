@@ -2,3 +2,4 @@ blog
 _tinker/blog/
 _tinker/__pycache__
 .idea
+.DS_Store
