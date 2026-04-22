@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -10,6 +11,9 @@
 <meta http-equiv="pragma" content="no-cache" />
 
 <link rel="shortcut icon" href="https://thonny.org/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
 <!--[if lt IE 9]>
@@ -33,437 +37,852 @@
 </script>
 
 <title>Thonny, Python IDE for beginners</title>
+
 <style>
-body {margin:2em; padding:1em}
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-h1 {
-    font-family: Georgia, serif;
-    margin-bottom: 0em;
-    font-size: 2.8em;
-    _color: #8B0000;
-}
+  :root {
+    --green-dark:   #3d5c3a;
+    --green-mid:    #647C64;
+    --green-light:  #e8f0e7;
+    --green-pale:   #f4f8f3;
+    --ukraine-blue: #005BBB;
+    --text-primary: #111111;
+    --text-secondary: #222222;
+    --text-muted:   #555555;
+    --border:       #d4e0d2;
+    --white:        #ffffff;
+    --code-bg:      #edf3ec;
+    --shadow-sm:    0 1px 4px rgba(40,70,38,.08);
+    --shadow-md:    0 4px 16px rgba(40,70,38,.12);
+    --shadow-lg:    0 8px 32px rgba(40,70,38,.16);
+    --radius:       10px;
+    --radius-lg:    16px;
+  }
 
-h2 {
-    font-family: Verdana, Arial, Helvetica, sans serif;
-    font-size: 2em;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-primary);
+    background: #f9fdf8;
+  }
 
-h3 {
-    font-size: 1.4em;
-}
+  /* ── GitHub Ribbon ── */
+  .github-fork-ribbon:before { background-color: var(--green-mid); }
+  .github-corner:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
+  @keyframes octocat-wave {
+    0%, 100% { transform: rotate(0); }
+    20%, 60% { transform: rotate(-25deg); }
+    40%, 80% { transform: rotate(10deg); }
+  }
+  @media (max-width: 500px) {
+    .github-corner:hover .octo-arm { animation: none; }
+    .github-corner .octo-arm { animation: octocat-wave 560ms ease-in-out; }
+  }
 
-h2.morespace {
-    margin-top:5em;
-}
+  /* ── Layout ── */
+  .site-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
 
-p  {
-    font-size: 1.15em;
-}
+  /* ── Ukraine Banner ── */
+  .ukraine-banner {
+    background: #fffde6;
+    border: 1.5px solid var(--ukraine-blue);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    margin: 28px 0 36px;
+    font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .ukraine-banner a { color: var(--ukraine-blue); font-weight: 500; }
 
-#maincolumn {
-    width:40em;
-    margin: 0 auto; 
-}
+  /* ── Hero ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 48px 0 56px;
+    border-bottom: 1px solid var(--border);
+  }
 
-#downloadbox {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #cccccc;
-    border-radius: 0.7em;
-    background-color: #fafafa;
-    font-size: 1em;
-    font-family: Georgia, serif;
-    text-align: left;
-    white-space: nowrap;
-}
+  .hero-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    line-height: 1.1;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
 
-#downloadbox td {
-    padding: 0em;
-    _border-style: solid;
-}
+  .hero-left .tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
 
-#features-table td {
-    vertical-align:top;
-    padding: 0em;
-    padding-bottom: 2em;
-}
+  /* ── Download Box ── */
+  .download-box {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-md);
+  }
 
-#features-table td.imgcell {
-    padding-left:2em;
-}
+  .download-box .dl-header {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
 
-#features-table img.framed {
-    border-style: solid;
-    border-width: 1px;
-    border-color: gray;
-}
+  .download-box .dl-version {
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    color: var(--text-primary);
+  }
 
-.github-fork-ribbon:before {
-     background-color: #647C64;
-}
+  .download-box .dl-version a {
+    color: var(--green-dark);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--green-light);
+  }
+  .download-box .dl-version a:hover { border-color: var(--green-mid); }
 
-a {
-    color: #004cbd;
-}
+  .dl-platforms {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
 
-.with-tooltip {
+  /* ── Tooltip system (kept functional) ── */
+  .with-tooltip {
     position: relative;
     display: inline-block;
-    text-decoration-style: dashed;
-}
+  }
 
-.trigger {
-    border-bottom: 1px dashed;
-}
+  .trigger {
+    display: inline-block;
+    padding: 8px 18px;
+    background: var(--green-pale);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--green-dark);
+    cursor: pointer;
+    transition: background .18s, border-color .18s, box-shadow .18s;
+  }
+  .trigger:hover {
+    background: var(--green-light);
+    border-color: var(--green-mid);
+    box-shadow: var(--shadow-sm);
+  }
 
-.tooltip-box {
+  .tooltip-box {
     visibility: hidden;
-    background-color: #fafafa;
-    text-align: left;
-    padding: 1em 2em;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #cccccc;
-    border-radius: 0.7em;
-    box-shadow: 0.4em 0.8em 0.7em #888888;
-    
-    right: -1em;
- 
-    /* Position the tooltip text - see examples below! */
+    opacity: 0;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-lg);
     position: absolute;
-    z-index: 1;
-}
+    z-index: 10;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 320px;
+    transition: opacity .18s;
+  }
 
-.tooltip-box p {
-    font-size: 1.0em;
-}
+  .tooltip-box h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
 
-_.tooltip-box tt {
-    background: gray;
-    color: white;
-}
+  .tooltip-box p {
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
 
-.with-tooltip:hover .tooltip-box {
+  .tooltip-box p:last-child { margin-bottom: 0; }
+
+  .tooltip-box a {
+    color: var(--green-dark);
+    font-weight: 500;
+  }
+
+  .tooltip-box code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--green-dark);
+  }
+
+  .tooltip-box hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 12px 0;
+  }
+
+  .with-tooltip:hover .tooltip-box {
     visibility: visible;
-}
-</style>
+    opacity: 1;
+  }
 
+  .dl-curious {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .dl-curious a { color: var(--text-muted); }
+
+  /* ── Hero screenshot ── */
+  .hero-screenshot {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--border);
+  }
+
+  /* ── Section headings ── */
+  .section {
+    padding: 64px 0 0;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--green-dark);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--green-light);
+  }
+
+  /* ── Features Grid ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s, border-color .2s, transform .2s;
+  }
+
+  .feature-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-mid);
+    transform: translateY(-2px);
+  }
+
+  .feature-img-wrap {
+    background: var(--green-pale);
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 180px;
+  }
+
+  .feature-img {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(40,70,38,.13);
+  }
+
+  .feature-text {
+    padding: 20px 22px 22px;
+  }
+
+  .feature-text h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+
+  .feature-text p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── Demo ── */
+  .demo-wrap {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .demo-link {
+    display: block;
+    width: 560px;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border);
+    transition: box-shadow .2s, transform .2s;
+  }
+  .demo-link:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  .demo-link img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Credits ── */
+  .credits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .credit-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .credit-card img {
+    max-width: 140px;
+    height: auto;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .credit-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .credit-card p a { color: var(--green-dark); font-weight: 500; }
+
+  .credits-note {
+    background: var(--green-pale);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .credits-note a { color: var(--green-dark); font-weight: 500; }
+
+  /* ── Two-column content layout ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  /* ── Lists ── */
+  .content-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .content-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .content-list li:last-child { border-bottom: none; }
+
+  .content-list li a {
+    color: var(--green-dark);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .content-list li a:hover { text-decoration: underline; }
+
+  .content-list li > ul {
+    list-style: none;
+    padding-left: 16px;
+    margin-top: 4px;
+  }
+
+  .content-list li > ul li {
+    border-bottom: none;
+    padding: 4px 0;
+    font-size: 0.9rem;
+  }
+
+  /* ── Plugins list ── */
+  .plugins-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .plugins-list li {
+    padding: 10px 16px 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .plugins-list li:nth-child(odd) { padding-right: 24px; }
+
+  .plugins-list li a {
+    color: var(--green-dark);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .plugins-list li a:hover { text-decoration: underline; }
+
+  .plugins-list li s { opacity: .55; }
+
+  .plugins-warning {
+    margin-top: 16px;
+    background: #fff8e6;
+    border: 1.5px solid #f0d080;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #7a6020;
+    font-weight: 500;
+  }
+
+  /* ── Papers ── */
+  .papers-list {
+    list-style: none;
+    padding: 0;
+  }
+  .papers-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+  }
+  .papers-list li:last-child { border-bottom: none; }
+  .papers-list li a {
+    color: var(--green-dark);
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.5;
+  }
+  .papers-list li a:hover { text-decoration: underline; }
+
+  /* ── inline links ── */
+  a { color: var(--green-dark); }
+
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    color: var(--green-dark);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .hero-left h1 { font-size: 2.8rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .credits-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .plugins-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .site-wrapper { padding: 0 16px 60px; }
+    .hero-left h1 { font-size: 2.2rem; }
+    .section-title { font-size: 1.6rem; }
+    .tooltip-box { min-width: 260px; left: -60px; }
+  }
+</style>
 </head>
 
 <body>
+
+<!-- GitHub corner ribbon -->
 <a
   class="github-corner"
   href="https://github.com/thonny/thonny/"
   target="_blank"
   aria-label="View source on GitHub"
-  ><svg
-    width="80"
-    height="80"
-    viewBox="0 0 250 250"
-    style="
-      fill: #60745c;
-      color: #fff;
-      position: absolute;
-      top: 0;
-      border: 0;
-      right: 0;
-    "
-    aria-hidden="true"
-  >
+  ><svg width="80" height="80" viewBox="0 0 250 250"
+    style="fill:#60745c;color:#fff;position:absolute;top:0;border:0;right:0;"
+    aria-hidden="true">
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-    <path
-      d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-      fill="currentColor"
-      style="transform-origin: 130px 106px"
-      class="octo-arm"
-    ></path>
-    <path
-      d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-      fill="currentColor"
-      class="octo-body"
-    ></path></svg
-></a>
-<style>
-  .github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-  @keyframes octocat-wave {
-    0%,
-    100% {
-      transform: rotate(0);
-    }
-    20%,
-    60% {
-      transform: rotate(-25deg);
-    }
-    40%,
-    80% {
-      transform: rotate(10deg);
-    }
-  }
-  @media (max-width: 500px) {
-    .github-corner:hover .octo-arm {
-      animation: none;
-    }
-    .github-corner .octo-arm {
-      animation: octocat-wave 560ms ease-in-out;
-    }
-  }
-</style>
+    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+      fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path>
+    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+      fill="currentColor" class="octo-body"></path>
+  </svg>
+</a>
 
+<div class="site-wrapper">
 
-<div id="maincolumn">
+  <!-- Ukraine Banner -->
+  <p class="ukraine-banner">
+    Thonny 4 is dedicated to Ukraine fighting the Russian invasion and Trump's blackmail.<br/>
+    🇺🇦 Please <a href="https://github.com/thonny/thonny/wiki/Support-Ukraine">support Ukraine</a>! 🇺🇦
+  </p>
 
-<p align="center" style="margin:1em;margin-bottom:3em; background-color:#fdffdf;border-radius: 0.7em; padding:1em; border-style:solid; border-width: 1px; border-color: #005BBB">
-Thonny 4 is dedicated to Ukraine fighting the Russian invasion<br/>and Trump's blackmail.<br/>
-🇺🇦 Please <a href="https://github.com/thonny/thonny/wiki/Support-Ukraine">support Ukraine</a>! 🇺🇦
-</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Thonny</h1>
+      <p class="tagline">Python IDE for beginners</p>
 
-<table id="downloadbox" style="float:right; margin-right:1.1em" cellspacing="0" cellpadding="0">
-    <tr>
-        <td rowspan="2" style="padding:0.8em 0.8em 0.4em 0.8em">
-            <a href="https://github.com/thonny/thonny/releases"><img src="img/download.png" width="40" height="40" border="0" alt="Download icon"/></a>
-        </td>
-        <td style="padding:0.8em 1.2em 0.2em 0em">Download version <b><a href="https://github.com/thonny/thonny/releases/tag/v4.1.7">4.1.7</a></b> for</td>
-    </tr>
-    <tr>
-        <td style="padding:0em 1.2em 0.8em 0em; font-size:1em">
-        <div class="with-tooltip"><span class="trigger">Windows</span>
-            <div class="tooltip-box" style="_width: 20em; margin-right: -8em">
-                <h3>Official downloads for Windows</h3>
-                <p id="py310_win_64"><b>Installer with 64-bit Python 3.10</b>, requires 64-bit Windows 8.1 / 10 / 11<br/>
-                    <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7.exe">thonny-4.1.7.exe (21 MB)</a></p>
-                <p id="py38_win_32"><b>Installer with 32-bit Python 3.8</b>, suitable for all Windows versions since 7<br/>
-                    <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-py38-4.1.7.exe">thonny-py38-4.1.7.exe (20 MB)</a></p>
-                <p><b>Portable variant with 64-bit Python 3.10</b><br/>
-                    <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7-windows-portable.zip">thonny-4.1.7-windows-portable.zip (31 MB)</a></p>
-                <p><b>Portable variant with 32-bit Python 3.8</b><br/>
-                    <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-py38-4.1.7-windows-portable.zip">thonny-py38-4.1.7-windows-portable.zip (29 MB)</a></p>
-                <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
-                    <code>pip install thonny</code></p>
-            </div>
+      <!-- Download Box -->
+      <div class="download-box">
+        <div class="dl-header">Download</div>
+        <div class="dl-version">
+          Version <a href="https://github.com/thonny/thonny/releases/tag/v4.1.7">4.1.7</a> for
         </div>
-        &nbsp;•&nbsp;
-        <div class="with-tooltip"><span class="trigger">Mac</span>
-            <div class="tooltip-box" style="_width: 20em; margin-right: -5em">
-                <h3>Official downloads for macOS</h3>
-                <p><b>Installer with Python 3.10</b> (universal2)<br/>
-                    <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7.pkg">thonny-4.1.7.pkg (42 MB)</a></p>
-                <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
-                    <code>pip install thonny</code></p>
-                <hr/>
-                <h3>3rd party distributions <span style="font-weight:normal">(may have older version)</span></h3>
-                <p><b>Downloading and launching the installer with Homebrew</b><br/>
-                    <code>brew install thonny</code></p>
+        <div class="dl-platforms">
+          <div class="with-tooltip">
+            <span class="trigger">Windows</span>
+            <div class="tooltip-box">
+              <h3>Official downloads for Windows</h3>
+              <p id="py310_win_64"><b>Installer with 64-bit Python 3.10</b>, requires 64-bit Windows 8.1 / 10 / 11<br/>
+                <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7.exe">thonny-4.1.7.exe (21 MB)</a></p>
+              <p id="py38_win_32"><b>Installer with 32-bit Python 3.8</b>, suitable for all Windows versions since 7<br/>
+                <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-py38-4.1.7.exe">thonny-py38-4.1.7.exe (20 MB)</a></p>
+              <p><b>Portable variant with 64-bit Python 3.10</b><br/>
+                <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7-windows-portable.zip">thonny-4.1.7-windows-portable.zip (31 MB)</a></p>
+              <p><b>Portable variant with 32-bit Python 3.8</b><br/>
+                <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-py38-4.1.7-windows-portable.zip">thonny-py38-4.1.7-windows-portable.zip (29 MB)</a></p>
+              <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
+                <code>pip install thonny</code></p>
             </div>
-        </div>
-        &nbsp;•&nbsp;
-        <div class="with-tooltip"><span class="trigger">Linux</span>
-            <div class="tooltip-box" style="_width: 20em; _margin-left: -10em">
-                <h3>Official downloads for Linux</h3>
-                <p><b>Installer</b> (installs private Python 3.10 on x86_64, uses existing python3 elsewhere) <br/>
-                    <code>bash &lt;(wget -O - https://thonny.org/installer-for-linux)</code></p>
-                <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
-                    <code>pip3 install thonny</code></p>
-                <hr/>
-                <h3>3rd party distributions <span style="font-weight:normal">(may have older version)</span></h3>
-                <p><b>Flatpak</b><br/>
-                    <code>flatpak install org.thonny.Thonny</code></p>
-                <p><b>Snap</b><br/>
-                    <code>sudo snap install thonny</code></p>
-                <p><b>Debian</b>, <b>Raspbian</b>, <b>Ubuntu</b>, <b>Mint</b> and others<br/>
-                    <code>sudo apt install thonny</code></p>
-                <p><b>Fedora</b><br/>
-                    <code>sudo dnf install thonny</code></p>
-            </div>
-        </div>
-        </td>
-    </tr>
-    <tr><td></td><td style="padding:0.3em 0.8em 0.8em 0.8em;font-size:x-small;text-align:right;font-style:italic">For the curious: <a href="https://github.com/thonny/thonny/releases/tag/v5.0.0b1">5.0.0b1</a></td></tr>
-</table>
+          </div>
 
-<script>
+          <div class="with-tooltip">
+            <span class="trigger">Mac</span>
+            <div class="tooltip-box">
+              <h3>Official downloads for macOS</h3>
+              <p><b>Installer with Python 3.10</b> (universal2)<br/>
+                <a href="https://github.com/thonny/thonny/releases/download/v4.1.7/thonny-4.1.7.pkg">thonny-4.1.7.pkg (42 MB)</a></p>
+              <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
+                <code>pip install thonny</code></p>
+              <hr/>
+              <h3>3rd party distributions <span style="font-weight:normal">(may have older version)</span></h3>
+              <p><b>Downloading and launching the installer with Homebrew</b><br/>
+                <code>brew install thonny</code></p>
+            </div>
+          </div>
+
+          <div class="with-tooltip">
+            <span class="trigger">Linux</span>
+            <div class="tooltip-box" style="left:auto;right:0;">
+              <h3>Official downloads for Linux</h3>
+              <p><b>Installer</b> (installs private Python 3.10 on x86_64, uses existing python3 elsewhere)<br/>
+                <code>bash &lt;(wget -O - https://thonny.org/installer-for-linux)</code></p>
+              <p><b>Re-using an existing Python installation</b> (for advanced users)<br/>
+                <code>pip3 install thonny</code></p>
+              <hr/>
+              <h3>3rd party distributions <span style="font-weight:normal">(may have older version)</span></h3>
+              <p><b>Flatpak</b><br/><code>flatpak install org.thonny.Thonny</code></p>
+              <p><b>Snap</b><br/><code>sudo snap install thonny</code></p>
+              <p><b>Debian</b>, <b>Raspbian</b>, <b>Ubuntu</b>, <b>Mint</b> and others<br/>
+                <code>sudo apt install thonny</code></p>
+              <p><b>Fedora</b><br/><code>sudo dnf install thonny</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="dl-curious">For the curious: <a href="https://github.com/thonny/thonny/releases/tag/v5.0.0b1">5.0.0b1</a></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img class="hero-screenshot" src="img/screenshot.png" alt="Main screenshot" />
+    </div>
+  </section>
+
+  <!-- JS for recommended download -->
+  <script>
     var recommended;
     if (navigator.appVersion.indexOf("Windows ")!=-1 || navigator.appVersion.platform == "Win32") {
-        // We're on Windows
-        if ((navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1)
-                && (navigator.appVersion.indexOf("Windows NT 11.")!=-1
-                || navigator.appVersion.indexOf("Windows NT 10.")!=-1
-                || navigator.appVersion.indexOf("Windows NT 6.3")!=-1)) {
-            recommended = "py310_win_64";
-        } else {
-            recommended = "py38_win_32";
-        }
+      if ((navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1)
+          && (navigator.appVersion.indexOf("Windows NT 11.")!=-1
+          || navigator.appVersion.indexOf("Windows NT 10.")!=-1
+          || navigator.appVersion.indexOf("Windows NT 6.3")!=-1)) {
+        recommended = "py310_win_64";
+      } else {
+        recommended = "py38_win_32";
+      }
     }
-
     if (recommended) {
-        elem = document.getElementById(recommended);
-        if (elem) {
-            elem.innerHTML += " ⇐ <i>recommended for you</i>";
-        }
+      var elem = document.getElementById(recommended);
+      if (elem) { elem.innerHTML += " ⇐ <i>recommended for you</i>"; }
     }
-</script>
-<h1 style="padding-left:0.4em">Thonny</h1>
-<div style="font-size:1.2em; font-family: Georgia, serif;padding-left:1em">Python IDE for beginners</div>
+  </script>
 
-<p>
-<img width="637" style="clear:both; margin-top:0em; margin-bottom:1.8em" src="img/screenshot.png"  alt="Main screenshot"/>
-</p>
+  <!-- Features -->
+  <section class="section">
+    <h2 class="section-title">Features</h2>
+    <div class="features-grid">
 
-<div style="margin-left:1.6em; margin-right:1.6em">
-<h2>Features</h2>
-<table id="features-table" border="0" cellspacing="0" cellpadding="0">
-<tr><td>
-    <p><b>Easy to get started.</b>
-    Thonny comes with Python 3.10 built in, so just one simple installer is needed and you're ready to learn programming. (You can also use a separate Python installation, if necessary.) The initial user interface is stripped of all features that may distract beginners.</p>
-</td><td class="imgcell"><img src="img/get_started.png" width="252" alt="Initial layout" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/get_started.png" alt="Initial layout" />
+        </div>
+        <div class="feature-text">
+          <h3>Easy to get started</h3>
+          <p>Thonny comes with Python 3.10 built in, so just one simple installer is needed and you're ready to learn programming. (You can also use a separate Python installation, if necessary.) The initial user interface is stripped of all features that may distract beginners.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>No-hassle variables.</b>
-    Once you're done with hello-worlds, select <i>View → Variables</i> and see how your programs and shell commands affect Python variables.</p>
-</td><td class="imgcell"><img class="framed" src="img/variables.png" width="250" alt="Variables table" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/variables.png" alt="Variables table" />
+        </div>
+        <div class="feature-text">
+          <h3>No-hassle variables</h3>
+          <p>Once you're done with hello-worlds, select <i>View → Variables</i> and see how your programs and shell commands affect Python variables.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Simple debugger.</b>
-    Just press Ctrl+F5 instead of F5 and you can run your programs step-by-step, no breakpoints needed. 
-    Press F6 for a big step and F7 for a small step. Steps follow program structure, not just code lines.</p>
-</td><td class="imgcell"><img class="framed" src="img/step_by_step.png" width="250" alt="Stepping through statements"/></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/step_by_step.png" alt="Stepping through statements" />
+        </div>
+        <div class="feature-text">
+          <h3>Simple debugger</h3>
+          <p>Just press Ctrl+F5 instead of F5 and you can run your programs step-by-step, no breakpoints needed. Press F6 for a big step and F7 for a small step. Steps follow program structure, not just code lines.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Step through expression evaluation.</b>
-    If you use small steps, then you can even see how Python evaluates your expressions. You can think of this light-blue box as a piece of paper where Python replaces subexpressions with their values, piece-by-piece.</p>
-</td><td class="imgcell"><img class="framed" src="img/expressions.png" width="250" alt="Visualization of expression evaluation" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/expressions.png" alt="Visualization of expression evaluation" />
+        </div>
+        <div class="feature-text">
+          <h3>Step through expression evaluation</h3>
+          <p>If you use small steps, then you can even see how Python evaluates your expressions. You can think of this light-blue box as a piece of paper where Python replaces subexpressions with their values, piece-by-piece.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Faithful representation of function calls.</b>
-    Stepping into a function call opens a new window with separate local variables table and code 
-    pointer. Good understanding of how function calls work is especially important for understanding recursion.</p>
-</td><td class="imgcell"><img class="framed" src="img/calls.png" width="250" alt="Visualization of call frames" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/calls.png" alt="Visualization of call frames" />
+        </div>
+        <div class="feature-text">
+          <h3>Faithful representation of function calls</h3>
+          <p>Stepping into a function call opens a new window with separate local variables table and code pointer. Good understanding of how function calls work is especially important for understanding recursion.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Highlights syntax errors.</b>
-    Unclosed quotes and parentheses are the most common beginners' syntax errors. Thonny's editor makes these easy to spot.</p>
-</td><td class="imgcell"><img class="framed" src="img/unclosed.png" width="250" alt="Visualization of syntax errors" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/unclosed.png" alt="Visualization of syntax errors" />
+        </div>
+        <div class="feature-text">
+          <h3>Highlights syntax errors</h3>
+          <p>Unclosed quotes and parentheses are the most common beginners' syntax errors. Thonny's editor makes these easy to spot.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Explains scopes.</b>
-    Highlighting variable occurrences reminds you that the same name doesn't always mean the same variable and helps spotting typos. Local variables are visually distinguished from globals.</p>
-</td><td class="imgcell"><img class="framed" src="img/names.png" width="250" alt="Local and global names are visually distinguished" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/names.png" alt="Local and global names are visually distinguished" />
+        </div>
+        <div class="feature-text">
+          <h3>Explains scopes</h3>
+          <p>Highlighting variable occurrences reminds you that the same name doesn't always mean the same variable and helps spotting typos. Local variables are visually distinguished from globals.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Mode for explaining references.</b>
-    Variables are initially presented according to simplified model (name → 
-value) but you can switch to more realistic model (name → address/id → value).</p>
-</td><td class="imgcell"><img class="framed" src="img/heap.png" width="250" alt="Variables table vs values table"/></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/heap.png" alt="Variables table vs values table" />
+        </div>
+        <div class="feature-text">
+          <h3>Mode for explaining references</h3>
+          <p>Variables are initially presented according to simplified model (name → value) but you can switch to more realistic model (name → address/id → value).</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Code completion.</b>
-    Students can explore APIs with the help of code completion.</p>
-</td><td class="imgcell"><img class="framed" src="img/completion.png" width="250" alt="Code completion" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/completion.png" alt="Code completion" />
+        </div>
+        <div class="feature-text">
+          <h3>Code completion</h3>
+          <p>Students can explore APIs with the help of code completion.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Beginner friendly system shell.</b>
-    Select <i>Tools → Open system shell</i> to install extra packages or learn handling Python on command line. PATH and conflicts with other Python interpreters are taken care of by Thonny.</p>
-</td><td class="imgcell"><img class="framed" src="img/system_shell.png" width="250" alt="System shell prepared for Python commands" /></td></tr>
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/system_shell.png" alt="System shell prepared for Python commands" />
+        </div>
+        <div class="feature-text">
+          <h3>Beginner friendly system shell</h3>
+          <p>Select <i>Tools → Open system shell</i> to install extra packages or learn handling Python on command line. PATH and conflicts with other Python interpreters are taken care of by Thonny.</p>
+        </div>
+      </div>
 
+      <div class="feature-card">
+        <div class="feature-img-wrap">
+          <img class="feature-img" src="img/pipgui_small.png" alt="Pip GUI" />
+        </div>
+        <div class="feature-text">
+          <h3>Simple and clean pip GUI</h3>
+          <p>Select <i>Tools → Manage packages</i> for even easier installation of 3rd party packages.</p>
+        </div>
+      </div>
 
-<tr><td>
-    <p><b>Simple and clean pip GUI.</b> Select <i>Tools → Manage packages</i> for even easier installation of 3rd party packages.</p>
-</td><td class="imgcell"><img class="framed" src="img/pipgui_small.png" width="250" alt="System shell prepared for Python commands" /></td></tr>
+    </div>
+  </section>
 
-</table>
+  <!-- Demo -->
+  <section class="section">
+    <h2 class="section-title">Demo</h2>
+    <div class="demo-wrap">
+      <a class="demo-link" href="https://www.youtube.com/watch?v=nwIgxrXP-X4">
+        <img src="img/thonny_youtube.png" alt="Watch Thonny demo on YouTube" />
+      </a>
+    </div>
+  </section>
 
-<h2>Demo</h2>
-<a href="https://www.youtube.com/watch?v=nwIgxrXP-X4"><img src="img/thonny_youtube.png" style="max-width:100%; height: auto" /></a>
+  <!-- Credits -->
+  <section class="section">
+    <h2 class="section-title">Credits</h2>
+    <p style="margin-bottom:24px;font-size:.95rem;color:var(--text-secondary);">
+      Thonny's main author is Aivar Annamaa. All design decisions and opinions are his own and may not reflect the views of the supporters listed below.
+    </p>
+    <div class="credits-grid">
+      <div class="credit-card">
+        <a href="https://www.ut.ee"><img src="img/unitartu600_blue.png" alt="University of Tartu" /></a>
+        <p>From 2014 to 2018 the main development of Thonny took place in <a href="https://www.cs.ut.ee/">Institute of Computer Science</a> of <a href="https://www.ut.ee">University of Tartu</a>, Estonia.</p>
+      </div>
+      <div class="credit-card">
+        <a href="https://cyber.ee/"><img src="img/cybernetica.svg" alt="Cybernetica" /></a>
+        <p>Since September 2018 development of Thonny is partially supported by <a href="https://cyber.ee/">Cybernetica AS</a>.</p>
+      </div>
+      <div class="credit-card">
+        <a href="https://www.raspberrypi.org/"><img src="img/raspberrypi.png" alt="Raspberry Pi Foundation" /></a>
+        <p>Development of several features in Thonny 3.0 and 3.3 was proposed and supported by <a href="https://www.raspberrypi.org/">Raspberry Pi Foundation</a>.</p>
+      </div>
+    </div>
+    <div class="credits-note">
+      We are also grateful for the help of <a href="https://github.com/thonny/thonny/blob/master/CREDITS.rst">several contributors from the open-source community around the world</a>.
+    </div>
+  </section>
 
-<h2 class="morespace">Credits</h2>
-<p>
-    Thonny’s main author is Aivar Annamaa. All design decisions and opinions are his own and may not reflect the views of the supporters listed below.
-</p>
+  <!-- Instructions & Downloads + Contact & News side by side -->
+  <section class="section">
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Instructions &amp; downloads</h2>
+        <ul class="content-list">
+          <li>Installation instructions
+            <ul>
+              <li><a href="https://github.com/thonny/thonny/wiki/Windows">for Windows</a></li>
+              <li><a href="https://github.com/thonny/thonny/wiki/MacOSX">for Mac</a></li>
+              <li><a href="https://github.com/thonny/thonny/wiki/Linux">for Linux</a></li>
+              <li><a href="https://github.com/thonny/thonny/wiki/SeparateInstall"><code>pip install thonny</code></a></li>
+            </ul>
+          </li>
+          <li><a href="https://github.com/thonny/thonny/wiki/FAQ">FAQ</a></li>
+          <li><a href="https://github.com/thonny/thonny/wiki">Wiki</a></li>
+        </ul>
+        <p style="margin-top:16px;font-size:.88rem;color:var(--text-secondary);">
+          Latest stable releases are linked in the download box above. Older releases and prereleases can be found at <a href="https://github.com/thonny/thonny/releases">github.com/thonny/thonny/releases</a>.
+        </p>
+      </div>
 
-<a href="https://www.ut.ee"><img src="img/unitartu600_blue.png"/></a>
-<p>From 2014 to 2018 the main development of Thonny took place in <a href="https://www.cs.ut.ee/">Institute of Computer Science</a> of <a href="https://www.ut.ee">University of Tartu</a>, Estonia.</p>
+      <div>
+        <h2 class="section-title">Contact &amp; News</h2>
+        <ul class="content-list">
+          <li><a href="https://github.com/thonny/thonny/blob/master/CHANGELOG.rst">Changelog</a></li>
+          <li><a href="https://groups.google.com/forum/#!forum/thonny">Forum / mailing list</a></li>
+          <li><a href="https://github.com/thonny/thonny/issues">Issues</a></li>
+          <li><a href="https://github.com/thonny/thonny/discussions">GitHub Discussions</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-<p>
-<a href="https://cyber.ee/"><img src="img/cybernetica.svg" width="250"/></a><br/>
-Since September 2018 development of Thonny is partially supported by <a href="https://cyber.ee/">Cybernetica AS</a>.
-</p>
-
-<p>
-<a href="https://www.raspberrypi.org/"><img src="img/raspberrypi.png"/></a><br/>
-Development of several features in Thonny 3.0 and 3.3 was proposed and supported by <a href="https://www.raspberrypi.org/">Raspberry Pi Foundation</a>.
-</p>
-
-
-<p>
-We are also grateful for the help of <a href="https://github.com/thonny/thonny/blob/master/CREDITS.rst">several contributors from the open-source community around the world</a>.
-</p>
-
-
-
-<h2 class="morespace">Instructions &amp; downloads</h2>
-<ul>
-<li>Installation instructions</li>
-    <ul>
-        <li><a href="https://github.com/thonny/thonny/wiki/Windows">for Windows </a></li>
-        <li><a href="https://github.com/thonny/thonny/wiki/MacOSX">for Mac</a></li>
-        <li><a href="https://github.com/thonny/thonny/wiki/Linux">for Linux</a></li>
-        <li><a href="https://github.com/thonny/thonny/wiki/SeparateInstall"> 
-    <code>pip install thonny</code></a></li>
+  <!-- Plugins -->
+  <section class="section">
+    <a name="plugins"></a>
+    <h2 class="section-title">Plug-ins</h2>
+    <p style="margin-bottom:20px;font-size:.95rem;color:var(--text-secondary);">
+      Thonny has <a href="https://github.com/thonny/thonny/wiki/Plugins">simple infrastructure for extensions</a>. These are some known Thonny plug-ins:
+    </p>
+    <ul class="plugins-list">
+      <li><a href="https://pypi.org/project/thonny-gitonic/">thonny-gitonic</a> — adds a command for opening <a href="https://github.com/kr-g/gitonic">gitonic</a></li>
+      <li><s><a href="https://pypi.org/project/thonny-black-format/">thonny-black-format</a></s> (abandoned)</li>
+      <li><a href="https://pypi.org/project/thonny-black-formatter/">thonny-black-formatter</a> — adds a command for formatting current file with <a href="https://black.readthedocs.io/en/stable/">Black</a></li>
+      <li><a href="https://pypi.org/project/thonny-ev3dev/">thonny-ev3dev</a> — allows uploading code to EV3 (and much more)</li>
+      <li><a href="https://pypi.org/project/thonny-error-explainer/">thonny-error-explainer</a> — extends Assistant with new error checkers</li>
+      <li><a href="https://pypi.org/project/thonny-lahendus/">thonny-lahendus</a> — allows loading exercises from <a href="https://lahendus.ut.ee">lahendus.ut.ee</a> and submitting solutions for automatic assessment</li>
+      <li><a href="https://pypi.org/project/thonny-edison/">thonny-edison</a> — allows uploading Python code to <a href="https://meetedison.com/">Edison educational robot</a></li>
+      <li><a href="https://pypi.org/project/thonny-dracula/">thonny-dracula</a> — adds Dracula syntax theme</li>
+      <li><a href="https://pypi.org/project/thonny-onedark/">thonny-onedark</a> — adds One Dark syntax theme</li>
+      <li><a href="https://pypi.org/project/thonny-crosshair/">thonny-crosshair</a> — adds commands for invoking <a href="https://github.com/pschanely/CrossHair">CrossHair analyzer</a></li>
+      <li><a href="https://pypi.org/project/thonny-icontract-hypothesis/">thonny-icontract-hypothesis</a> — adds commands for invoking <a href="https://github.com/mristin/icontract-hypothesis">icontract-hypothesis analyzer</a></li>
+      <li><a href="https://pypi.org/project/thonny-py5mode/">thonny-py5mode</a> — adds <a href="https://py5coding.org/">py5</a> support for a Processing-like creative coding environment</li>
+      <li><a href="https://pypi.org/project/thonny-flake/">thonny-flake</a> — adds warnings from <a href="https://github.com/PyCQA/flake8">flake8</a></li>
+      <li><a href="https://pypi.org/project/thonny-autosave/">thonny-autosave</a> — adds the option for auto-saving your script in every 10 seconds</li>
     </ul>
-<li><a href="https://github.com/thonny/thonny/wiki/FAQ">FAQ</a></li>
-<li><a href="https://github.com/thonny/thonny/wiki">Wiki</a></li>
-</ul>
+    <div class="plugins-warning">
+      ⚠️ Note that Thonny developers are neither endorsing nor responsible for these plug-ins!
+    </div>
+  </section>
 
-<p>Latest stable releases are linked in the download box at the top of this page. Older releases and prereleases can be found at <a 
-href="https://github.com/thonny/thonny/releases">https://github.com/thonny/thonny/releases</a>
-</p>
+  <!-- Papers -->
+  <section class="section">
+    <h2 class="section-title">Papers</h2>
+    <ul class="papers-list">
+      <li><a href="https://dl.acm.org/citation.cfm?id=2729094.2754849&coll=DL&dl=GUIDE&CFID=729521140&CFTOKEN=81247902">Thonny, a Python IDE for learning programming (poster paper at ITiCSE'15)</a></li>
+      <li><a href="https://dl.acm.org/citation.cfm?id=2828969">Introducing Thonny, a Python IDE for learning programming (short paper at Koli Calling'15)</a></li>
+    </ul>
+  </section>
 
-<a name="plugins"></a>
-<h2 class="morespace">Plug-ins</h2>
-<p>Thonny has <a href="https://github.com/thonny/thonny/wiki/Plugins">simple infrastructure for extensions</a>.</p>
-<p>These are some known Thonny plug-ins:</p>
-<ul>
-    <li><a href="https://pypi.org/project/thonny-gitonic/">thonny-gitonic</a> adds a command for opening <a href="https://github.com/kr-g/gitonic">gitonic</a></li>
-    <li><s><a href="https://pypi.org/project/thonny-black-format/">thonny-black-format</a></s> (abandoned)</li>
-    <li><a href="https://pypi.org/project/thonny-black-formatter/">thonny-black-formatter</a> adds a command for formatting current file with <a href="https://black.readthedocs.io/en/stable/">Black</a></li>
-    <li><a href="https://pypi.org/project/thonny-ev3dev/">thonny-ev3dev</a> allows uploading code to EV3 (and much more)</li>
-    <li><a href="https://pypi.org/project/thonny-error-explainer/">thonny-error-explainer</a> extends Assistant with new error checkers</li>
-    <li><a href="https://pypi.org/project/thonny-lahendus/">thonny-lahendus</a> allows loading exercises from <a href="https://lahendus.ut.ee">lahendus.ut.ee</a> and submitting solutions for automatic assessment.</li>
-    <li><a href="https://pypi.org/project/thonny-edison/">thonny-edison</a> allows uploading Python code to <a href="https://meetedison.com/">Edison educational robot</a></li>
-    <li><a href="https://pypi.org/project/thonny-dracula/">thonny-dracula</a> adds Dracula syntax theme.</li>
-    <li><a href="https://pypi.org/project/thonny-onedark/">thonny-onedark</a> adds One Dark syntax theme.</li>
-    <li><a href="https://pypi.org/project/thonny-crosshair/">thonny-crosshair</a> adds commands for invoking <a href="https://github.com/pschanely/CrossHair">CrossHair analyzer</a>.</li>
-    <li><a href="https://pypi.org/project/thonny-icontract-hypothesis/">thonny-icontract-hypothesis</a> adds commands for invoking <a href="https://github.com/mristin/icontract-hypothesis">icontract-hypothesis analyzer</a>.</li>
-    <li><a href="https://pypi.org/project/thonny-py5mode/">thonny-py5mode</a> adds <a href="https://py5coding.org/">py5</a> support for a Processing-like creative coding environment.</li>
-    <li><a href="https://pypi.org/project/thonny-flake/">thonny-flake</a> adds warnings from <a href="https://github.com/PyCQA/flake8">flake8</a>.</li>
-    <li><a href="https://pypi.org/project/thonny-autosave/">thonny-autosave</a> adds the option for auto-saving your script in every 10 seconds.</li>
-</ul>
-
-<strong>Note that Thonny developers are neither endorsing nor responsible for these plug-ins!</strong>
-
-<h2 class="morespace">Contact &amp; News</h2>
-<ul>
-    <li><a href="https://github.com/thonny/thonny/blob/master/CHANGELOG.rst">Changelog</a></li>
-    <li><a href="https://groups.google.com/forum/#!forum/thonny">Forum / mailing list</a></li>
-    <li><a href="https://github.com/thonny/thonny/issues">Issues</a></li>
-    <li><a href="https://github.com/thonny/thonny/discussions">GitHub Discussions</a></li>
-</ul>
-
-<h2 class="morespace">Papers</h2>
-<ul>
-<li><a 
-href="https://dl.acm.org/citation.cfm?id=2729094.2754849&coll=DL&dl=GUIDE&CFID=729521140&CFTOKEN=81247902">Thonny, 
-a Python IDE for learning programming (poster paper at 
-ITiCSE'15)</a></li>
-<li><a href='https://dl.acm.org/citation.cfm?id=2828969'>Introducing 
-Thonny, a Python IDE for learning programming (short 
-paper at Koli Calling'15)</a></li>
-</ul>
-
-</div>
-
-</div>
+</div><!-- end site-wrapper -->
 
 </body>
 </html>
