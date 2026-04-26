@@ -209,6 +209,28 @@ _.tooltip-box tt {
       animation: octocat-wave 560ms ease-in-out;
     }
   }
+
+.copyable-command {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.copyable-command code {
+  margin: 0;
+}
+
+.copy-button {
+  cursor: pointer;
+  padding: 0.1em 0.4em;
+  font-size: 0.85em;
+  line-height: 1.2;
+  margin: 0;
+  margin-left: 1.0em;
+  vertical-align: baseline;
+}
 </style>
 
 
@@ -261,9 +283,13 @@ Thonny 5 is dedicated to Ukraine fighting the Russian invasion.<br/>
         <div class="with-tooltip"><span class="trigger">Linux</span>
             <div class="tooltip-box" style="_width: 20em; _margin-left: -10em">
                 <h3>Official downloads for Linux</h3>
-                <p><b>Installer</b> (creates new venv with existing python3) <br/>
-                    <code>bash &lt;(wget -O - https://thonny.org/installer-for-linux)</code></p>
-                <p><b>Manual installation</b> (for advanced users)<br/>
+                <p><b>Installer</b>, uses existing python3 <br/>
+                    <span class="copyable-command">
+                      <code id="linux-installer-command">wget -O - https://thonny.org/installer-for-linux | bash</code>
+                      <button type="button" class="copy-button" data-copy-target="linux-installer-command" aria-label="Copy Linux installation command">Copy</button>
+                    </span>
+                </p>
+                <p><b>Manual installation</b>, for advanced users<br/>
                     <code>pip3 install thonny</code></p>
                 <hr/>
                 <h3>3rd party distributions <span style="font-weight:normal">(may have older version)</span></h3>
@@ -484,6 +510,32 @@ paper at Koli Calling'15)</a></li>
 </div>
 
 </div>
+
+
+<script>
+  document.querySelectorAll(".copy-button").forEach(function (button) {
+    button.addEventListener("click", async function () {
+      const targetId = button.getAttribute("data-copy-target");
+      const target = document.getElementById(targetId);
+      if (!target) {
+        return;
+      }
+
+      const text = target.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(function () {
+          button.textContent = originalText;
+        }, 1500);
+      } catch (error) {
+        button.textContent = "Copy failed";
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
